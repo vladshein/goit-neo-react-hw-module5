@@ -1,0 +1,16 @@
+.searchbar {
+  width: 250px;
+  display: flex;
+  margin-bottom: 20px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  padding: 20px;
+}
+
+.forminput {
+  margin-right: 10px;
+}
+
+header {
+  background-color: blue;
+}
