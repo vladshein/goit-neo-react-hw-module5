@@ -1,5 +1,11 @@
-import { useState, useEffect } from "react";
-import { Link, Outlet, useParams, useNavigate } from "react-router-dom";
+import { useState, useEffect, useRef } from "react";
+import {
+  Link,
+  Outlet,
+  useParams,
+  useNavigate,
+  useLocation,
+} from "react-router-dom";
 import { fetchSingle } from "../../components/api/api";
 import style from "./MovieDetailsPage.module.css";
 
@@ -8,6 +14,8 @@ const MovieDetailsPage = () => {
   const [movie, setMovie] = useState({});
   console.log("MovieId:", movieId);
   const navigate = useNavigate();
+  const location = useLocation();
+  const goBack = useRef(location.state || "/movies");
 
   useEffect(() => {
     if (movieId) {
@@ -21,7 +29,7 @@ const MovieDetailsPage = () => {
   }, [movieId]);
 
   const handleOnClick = () => {
-    navigate(-1);
+    navigate(goBack.current);
   };
 
   return (
