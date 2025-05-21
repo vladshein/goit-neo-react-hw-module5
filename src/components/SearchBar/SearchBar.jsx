@@ -1,4 +1,4 @@
-import css from "./SearchBar.module.css";
+// import css from "./SearchBar.module.css";
 import toast, { Toaster } from "react-hot-toast";
 
 const SearchBar = ({ onSubmit }) => {
@@ -6,28 +6,27 @@ const SearchBar = ({ onSubmit }) => {
     evt.preventDefault();
 
     const form = evt.target;
-    const photos = form.elements.input.value;
+    const query = form.elements.input.value;
 
-    if (photos.trim() === "") {
+    if (query.trim() === "") {
       toast.error("Please enter your query.");
       return;
     }
 
-    onSubmit(photos);
+    onSubmit(query);
     form.reset();
   };
 
   return (
     <header>
       <Toaster />
-      <form className={css.searchbar} onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <input
-          className={css.forminput}
           name="input"
           type="text"
           autoComplete="off"
           autoFocus
-          placeholder="Search images and photos"
+          placeholder="Search movie"
         />
         <button type="submit">Search</button>
       </form>

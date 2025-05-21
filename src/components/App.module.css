@@ -8,3 +8,17 @@
 .app {
   padding: 32px;
 }
+
+.container {
+  padding: 0 32px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.headerdiv {
+  padding: 20px;
+  display: flex;
+  gap: 20px;
+  border-bottom: 2px solid grey;
+  margin-bottom: 20px;
+}

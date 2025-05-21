@@ -1,20 +1,51 @@
 import axios from "axios";
 
-const ACCESS_KEY = "N_iT0R_kluhm6oNP9308eYA73iVc_gIeDoUbF70TSus";
-axios.defaults.baseURL = "https://api.unsplash.com";
+axios.defaults.baseURL = "https://api.themoviedb.org/3/";
+const url_trending = "trending/movie/day";
+const url_search = "search/movie";
 
-async function fetchPhotos(query, page = 1) {
-  const data = await axios.get("/search/photos", {
-    params: {
-      query,
-      client_id: ACCESS_KEY,
-      per_page: 12,
-      page,
-    },
-  });
+const API_KEY =
+  "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmMDM2MDVlMjA3ODFlODEwMzkyMzFkMjBmYjJkOThmMCIsIm5iZiI6MTc0NzY0MjIwOS4xNTgwMDAyLCJzdWIiOiI2ODJhZTc2MWVmNjg4Mzc3OWJmNTVkNzYiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.pEb-WsrvHiQCM1WLvLdHwZEhZLYsfhG_XmttLrfUz4s";
 
-  console.log("response.data.results", data);
-  return data;
+const options = {
+  headers: {
+    Authorization: `Bearer ${API_KEY}`,
+  },
+};
+
+async function fetchTrending() {
+  const response = await axios.get(url_trending, options);
+
+  console.log("response.data.results", response);
+  return response;
 }
 
-export { fetchPhotos };
+async function fetchSingle(movie_id) {
+  const response = await axios.get(`movie/${movie_id}`, options);
+
+  console.log("response.data.results", response);
+  return response;
+}
+
+async function fetchCast(movie_id) {
+  const response = await axios.get(`movie/${movie_id}/credits`, options);
+
+  console.log("response.data.results", response);
+  return response;
+}
+
+async function fetchReview(movie_id) {
+  const response = await axios.get(`movie/${movie_id}/reviews`, options);
+
+  console.log("response.data.results", response);
+  return response;
+}
+
+async function fetchMovies(query) {
+  const response = await axios.get(`${url_search}?query=${query}`, options);
+
+  console.log("response.data.results", response);
+  return response;
+}
+
+export { fetchTrending, fetchSingle, fetchMovies, fetchCast, fetchReview };
